@@ -28,7 +28,6 @@ public class SecurityConfig {
         this.jwtAuthenticationFilter = jwtAuthenticationFilter;
     }
 
-
     // =========================
     // PASSWORD ENCODER
     // =========================
@@ -38,7 +37,6 @@ public class SecurityConfig {
 
         return new BCryptPasswordEncoder();
     }
-
 
     // =========================
     // SECURITY FILTER CHAIN
@@ -56,7 +54,6 @@ public class SecurityConfig {
 
             .csrf(csrf -> csrf.disable())
 
-
             // =========================
             // CORS
             // =========================
@@ -66,7 +63,6 @@ public class SecurityConfig {
                             corsConfigurationSource()
                     )
             )
-
 
             // =========================
             // SESSION
@@ -78,7 +74,6 @@ public class SecurityConfig {
                             SessionCreationPolicy.STATELESS
                     )
             )
-
 
             // =========================
             // SECURITY HEADERS
@@ -101,13 +96,11 @@ public class SecurityConfig {
                     )
             )
 
-
             // =========================
             // AUTHORIZATION
             // =========================
 
             .authorizeHttpRequests(auth -> auth
-
 
                 // =========================
                 // CORS PREFLIGHT
@@ -117,7 +110,6 @@ public class SecurityConfig {
                         HttpMethod.OPTIONS,
                         "/**"
                 ).permitAll()
-
 
                 // =========================
                 // PUBLIC ENDPOINTS
@@ -130,12 +122,8 @@ public class SecurityConfig {
                         "/actuator/health"
                 ).permitAll()
 
-
                 // =========================
                 // EMPLOYEE LOGIN CREATION
-                // =========================
-                // Only ADMIN / HR_ADMIN
-                // can create employee login
                 // =========================
 
                 .requestMatchers(
@@ -146,16 +134,8 @@ public class SecurityConfig {
                         "HR_ADMIN"
                 )
 
-
                 // =========================
                 // EMPLOYEE SELF SERVICE
-                // =========================
-                //
-                // Employee can access:
-                // /api/employee/**
-                //
-                // Backend decides which employee
-                // using JWT + users.employee_id
                 // =========================
 
                 .requestMatchers(
@@ -166,13 +146,8 @@ public class SecurityConfig {
                         "HR_ADMIN"
                 )
 
-
                 // =========================
                 // HR
-                // =========================
-                //
-                // Employee CANNOT access
-                // generic HR endpoints
                 // =========================
 
                 .requestMatchers(
@@ -181,7 +156,6 @@ public class SecurityConfig {
                         "ADMIN",
                         "HR_ADMIN"
                 )
-
 
                 // =========================
                 // INVENTORY
@@ -195,7 +169,6 @@ public class SecurityConfig {
                         "SALES_MANAGER"
                 )
 
-
                 // =========================
                 // ACCOUNTING
                 // =========================
@@ -206,7 +179,6 @@ public class SecurityConfig {
                         "ADMIN",
                         "ACCOUNTANT"
                 )
-
 
                 // =========================
                 // SALES
@@ -219,7 +191,6 @@ public class SecurityConfig {
                         "SALES_MANAGER",
                         "HR_ADMIN"
                 )
-
 
                 // =========================
                 // REPORTS
@@ -235,7 +206,6 @@ public class SecurityConfig {
                         "INVENTORY_MANAGER"
                 )
 
-
                 // =========================
                 // AUDIT LOGS
                 // =========================
@@ -248,14 +218,12 @@ public class SecurityConfig {
                         "SALES_MANAGER"
                 )
 
-
                 // =========================
                 // EVERYTHING ELSE
                 // =========================
 
                 .anyRequest().authenticated()
             )
-
 
             // =========================
             // JWT FILTER
@@ -266,10 +234,8 @@ public class SecurityConfig {
                     UsernamePasswordAuthenticationFilter.class
             );
 
-
         return http.build();
     }
-
 
     // =========================
     // CORS CONFIGURATION
@@ -281,17 +247,16 @@ public class SecurityConfig {
         CorsConfiguration configuration =
                 new CorsConfiguration();
 
-
         // =========================
-        // FRONTEND
+        // FRONTEND ORIGINS
         // =========================
 
         configuration.setAllowedOrigins(
                 List.of(
-                        "http://localhost:5173"
+                        "http://localhost:5173",
+                        "https://enterprise-erp-system-frontend.vercel.app"
                 )
         );
-
 
         // =========================
         // HTTP METHODS
@@ -308,7 +273,6 @@ public class SecurityConfig {
                 )
         );
 
-
         // =========================
         // HEADERS
         // =========================
@@ -321,13 +285,11 @@ public class SecurityConfig {
                 )
         );
 
-
         // =========================
         // CREDENTIALS
         // =========================
 
         configuration.setAllowCredentials(false);
-
 
         // =========================
         // REGISTER CORS
@@ -340,7 +302,6 @@ public class SecurityConfig {
                 "/**",
                 configuration
         );
-
 
         return source;
     }
