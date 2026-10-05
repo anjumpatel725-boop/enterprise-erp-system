@@ -4,7 +4,7 @@ import {
   Route,
 } from "react-router-dom";
 import "./index.css";
-import "./app.css";
+import "./App.css";
 import Sidebar from "./components/Sidebar";
 import Navbar from "./components/Navbar";
 import ProtectedRoute from "./components/ProtectedRoute";
