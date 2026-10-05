@@ -8,12 +8,10 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
-import java.util.List;
 
 @Component
 public class JwtAuthenticationFilter
@@ -37,6 +35,33 @@ public class JwtAuthenticationFilter
             FilterChain filterChain)
             throws ServletException, IOException {
 
+        // =========================
+        // CORS PREFLIGHT
+        // =========================
+        //
+        // Browser sends OPTIONS request
+        // before actual POST/GET request.
+        //
+        // OPTIONS request does not need JWT.
+        // Let Spring Security CORS handling
+        // process it normally.
+        // =========================
+
+        if ("OPTIONS".equalsIgnoreCase(
+                request.getMethod())) {
+
+            filterChain.doFilter(
+                    request,
+                    response
+            );
+
+            return;
+        }
+
+        // =========================
+        // GET AUTHORIZATION HEADER
+        // =========================
+
         String authHeader =
                 request.getHeader("Authorization");
 
@@ -54,6 +79,10 @@ public class JwtAuthenticationFilter
 
             return;
         }
+
+        // =========================
+        // EXTRACT TOKEN
+        // =========================
 
         String token =
                 authHeader.substring(7);
@@ -97,8 +126,9 @@ public class JwtAuthenticationFilter
             // GET AUTHORITIES
             // =========================
             //
-            // Use authorities from
+            // Authorities come from
             // CustomUserDetailsService.
+            //
             // This avoids role mismatch
             // between JWT and database.
             // =========================
@@ -140,6 +170,10 @@ public class JwtAuthenticationFilter
 
         } catch (Exception e) {
 
+            // =========================
+            // JWT ERROR
+            // =========================
+
             System.out.println(
                     "JWT ERROR = " +
                     e.getMessage()
@@ -147,6 +181,10 @@ public class JwtAuthenticationFilter
 
             e.printStackTrace();
         }
+
+        // =========================
+        // CONTINUE FILTER CHAIN
+        // =========================
 
         filterChain.doFilter(
                 request,
