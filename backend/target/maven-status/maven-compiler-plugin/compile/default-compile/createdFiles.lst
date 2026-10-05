@@ -32,6 +32,7 @@ com\erp\hr\repository\EmployeeRepository.class
 com\erp\sales\dto\SalesOrderItemResponse.class
 com\erp\hr\controller\DepartmentController.class
 com\erp\inventory\entity\Category.class
+com\erp\hr\controller\EmployeeAttendanceController.class
 com\erp\sales\entity\SalesOrderStatus.class
 com\erp\hr\dto\AttendanceRequest.class
 com\erp\sales\service\SalesOrderServiceImpl$1.class
@@ -49,6 +50,7 @@ com\erp\auth\service\CustomUserDetailsService.class
 com\erp\inventory\dto\StockTransactionRequest.class
 com\erp\inventory\dto\CategoryResponse.class
 com\erp\accounting\dto\TransactionRequest.class
+com\erp\hr\dto\EmployeeLeaveRequest.class
 com\erp\sales\dto\SalesOrderStatusRequest.class
 com\erp\inventory\entity\StockTransaction.class
 com\erp\auth\repository\UserRepository.class
@@ -67,6 +69,7 @@ com\erp\auth\dto\EmployeeLoginRequest.class
 com\erp\hr\dto\EmployeeProfileResponse.class
 com\erp\common\exception\GlobalExceptionHandler.class
 com\erp\hr\repository\AttendanceRepository.class
+com\erp\hr\controller\EmployeeLeaveController.class
 com\erp\hr\dto\EmployeeResponse.class
 com\erp\reporting\repository\ReportingRepository.class
 com\erp\sales\controller\SalesOrderController.class
@@ -110,5 +113,6 @@ com\erp\auth\controller\AuthController.class
 com\erp\auth\entity\User.class
 com\erp\reporting\controller\ReportingController.class
 com\erp\auth\entity\Role.class
+com\erp\hr\service\EmployeeSelfService.class
 com\erp\inventory\repository\SupplierRepository.class
 com\erp\inventory\controller\CategoryController.class
