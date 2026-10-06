@@ -10,7 +10,7 @@ function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  // Employee role removed from normal registration
+ 
   const [role, setRole] = useState("ADMIN");
 
   const [loading, setLoading] = useState(false);
