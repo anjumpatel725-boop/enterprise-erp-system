@@ -10,7 +10,8 @@ function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const [role, setRole] = useState("EMPLOYEE");
+  // Employee role removed from normal registration
+  const [role, setRole] = useState("ADMIN");
 
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
@@ -42,10 +43,11 @@ function Register() {
         "Registration successful! Redirecting to login..."
       );
 
+      // Clear form
       setUsername("");
       setEmail("");
       setPassword("");
-      setRole("EMPLOYEE");
+      setRole("ADMIN");
 
 
       setTimeout(() => {
@@ -288,10 +290,6 @@ function Register() {
               required
             >
 
-              <option value="EMPLOYEE">
-                Employee
-              </option>
-
               <option value="ADMIN">
                 Admin
               </option>
@@ -345,10 +343,12 @@ function Register() {
           </div>
 
 
+          {/* EMPLOYEE INFORMATION */}
+
           <div className="login-footer">
 
-            Select the appropriate role
-            for this ERP account.
+            Employee accounts are created by HR
+            through the Employee Management module.
 
           </div>
 
